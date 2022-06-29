@@ -16,7 +16,8 @@ import "../elements"
 Rectangle {
     property alias settings_popup: settings_popup
     property alias closeButton: closeButton
-
+    color:"black"
+    opacity: 0.5
     id: settings_popup
 
     anchors.fill: parent
@@ -318,7 +319,6 @@ Rectangle {
         anchors.leftMargin: 0
         anchors.top: parent.top
         anchors.topMargin: 0
-
 
         AppSettingsPanel {
             id: appSettingsPanel

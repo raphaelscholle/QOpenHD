@@ -3,7 +3,7 @@ import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 import QtGraphicalEffects 1.12
 
-
+//This is the Card which is used in the about forms
 
 Item {
     id: card
