@@ -314,8 +314,8 @@ LinuxBuild {
 JetsonBuild {
     message("JetsonBuild")
     CONFIG += EnableMainVideo
-    CONFIG += EnableJoysticks
-    CONFIG += EnableRC
+    #CONFIG += EnableJoysticks
+    #CONFIG += EnableRC
     CONFIG += EnablePiP
     CONFIG += EnableLink
     #CONFIG += EnableCharts
@@ -324,8 +324,8 @@ JetsonBuild {
     #CONFIG += EnableBlackbox
     #CONFIG += EnableVR
     #CONFIG += EnableLog //does not work due to filepath not set
-    CONFIG += EnableRC
-    CONFIG += EnableJoysticks
+    #CONFIG += EnableRC
+    #CONFIG += EnableJoysticks
 
     CONFIG += EnableGStreamer
 
