@@ -23,7 +23,7 @@ jobs:
     
     - name: Emulating Jetson
       id: qemu
-      uses: ./github/arm-runner-action
+      uses: "./github/arm-runner-action"
       with:
         base_image: http://openhdfpv.org/wp-content/BaseImages/Open.HD-2.1-05221841-jetson-nano-4gb-bionic.img.zip
         cpu: cortex-a57
