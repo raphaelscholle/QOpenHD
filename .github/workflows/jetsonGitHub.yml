@@ -48,6 +48,8 @@ jobs:
           sudo add-apt-repository ppa:mhier/libboost-latest -y
           sudo add-apt-repository ppa:git-core/ppa -y
           apt update
+          apt install gcc-8 -y
+          apt remove gcc-7 -y
           apt install -y openhd-qt-jetson-nano-bionic 
           apt upgrade -y
           sudo bash install_dep.sh
