@@ -2,3 +2,6 @@
 [submodule "lib/MAVSDK"]
 	path = lib/MAVSDK
 	url = https://github.com/OpenHD/MAVSDK
+[submodule ".github/arm-runner-action"]
+	path = .github/arm-runner-action
+	url = https://github.com/raphaelscholle/arm-runner-action/
