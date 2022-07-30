@@ -8,7 +8,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     env:
       CLOUDSMITH_API_KEY: ${{ secrets.CLOUDSMITH_API_KEY }}
     steps:
@@ -18,7 +18,8 @@ jobs:
         submodules: recursive
         
     - name: Install packages
-      run: sudo apt-get install -y sudo udev gdisk
+      run: ls -a
+
     
     - name: Emulating Jetson
       id: qemu
