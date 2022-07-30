@@ -18,7 +18,9 @@ jobs:
         submodules: recursive
         
     - name: Install packages
-      run: ls -a
+      run: |
+        sudo mkdir github
+        sudo cp -r .github/arm-runner-action github/arm-runner-action
 
     
     - name: Emulating Jetson
