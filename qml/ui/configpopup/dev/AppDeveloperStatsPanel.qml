@@ -54,10 +54,32 @@ Rectangle {
             anchors.margins: 10
 
             Text {
-                id: test0
+                id: identMessage
                 text: qsTr("Encrypted:" + _ohdSystemAir.link_type)
                 Layout.leftMargin: 12
             }
+            Text {
+                id: platform
+                text: qsTr("PlatformID:" + _ohdSystemAir.link_type.substring(1, 3))
+                Layout.leftMargin: 12
+            Text {
+                id: decryptedPlatform
+                text: qsTr("Platform:" + decryptPlatform(platform.text))
+                Layout.leftMargin: 12
+                }
+
+            function decryptPlatform(encryptedPlatform) {
+                var decryptionMap = {
+                    "00": "unknown",
+                    "10": "X20",
+                    "20": "x86",
+                    "30": "rpi",
+                    "40": "rock"
+                };
+
+                return decryptionMap[encryptedPlatform] || "Unknown Platform";
+            }
+
             Text {
                 id: test1
                 text: qsTr("Art Horizon mavlink update rate:" + _fcMavlinkSystem.curr_update_rate_mavlink_message_attitude + " Hz")
