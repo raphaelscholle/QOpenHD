@@ -55,13 +55,27 @@ Rectangle {
 
             Text {
                 id: platformMessage
-                text: qsTr("Platform:" + _ohdSystemAir.ohd_platform_type)
+                property int platformCode: _ohdSystemAir.ohd_platform_type
+
+                function platformName(code) {
+                    switch (code) {
+                        case 0: return "unknown";
+                        case 10: return "X20";
+                        case 20: return "x86";
+                        case 30: return "rpi";
+                        case 40: return "rock";
+                        default: return "unknown";
+                    }
+                }
+
+                text: "Platform: " + platformName(platformCode)
                 Layout.leftMargin: 12
             }
-                Text {
-                id: camMessage
-                text: qsTr("Wifi:" + _ohdSystemAir.ohd_wifi_type)
-                Layout.leftMargin: 12
+
+            Text {
+            id: camMessage
+            text: qsTr("Wifi:" + _ohdSystemAir.ohd_wifi_type)
+            Layout.leftMargin: 12
             }
             Text {
                 id: wifiMessage
