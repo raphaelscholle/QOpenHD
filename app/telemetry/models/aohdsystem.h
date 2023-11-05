@@ -63,6 +63,7 @@ public: // public for QT
     L_RO_PROP(int,curr_space_left_mb,set_curr_space_left_mb,0)
     L_RO_PROP(int,ram_usage_perc,set_ram_usage_perc,0)
     L_RO_PROP(int,ram_total,set_ram_total,0)
+    L_RO_PROP(int,link_type,set_ohd_sys_options,0)
     // RPI only
     L_RO_PROP(bool,rpi_undervolt_error,set_rpi_undervolt_error,false)
     // needs ina219 sensor

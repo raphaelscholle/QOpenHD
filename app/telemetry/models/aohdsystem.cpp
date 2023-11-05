@@ -273,6 +273,7 @@ void AOHDSystem::process_onboard_computer_status(const mavlink_onboard_computer_
     set_ina219_current_milliamps(msg.storage_usage[3]);
     set_ram_usage_perc(msg.ram_usage);
     set_ram_total(msg.ram_total);
+    set_ohd_sys_options(msg.link_type[0]);
     int16_t air_reported_sys_id=msg.fan_speed[0];
     set_air_reported_fc_sys_id(air_reported_sys_id);
 }

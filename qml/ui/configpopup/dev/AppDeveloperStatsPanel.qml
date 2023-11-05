@@ -55,6 +55,11 @@ Rectangle {
 
             Text {
                 id: test1
+                text: qsTr("Encrypted:" + _ohdSystemAir.link_type)
+                Layout.leftMargin: 12
+            }
+            Text {
+                id: test1
                 text: qsTr("Art Horizon mavlink update rate:" + _fcMavlinkSystem.curr_update_rate_mavlink_message_attitude + " Hz")
                 Layout.leftMargin: 12
             }
