@@ -62,6 +62,7 @@ Rectangle {
                 id: platform
                 text: qsTr("PlatformID:" + _ohdSystemAir.link_type.substring(1, 3))
                 Layout.leftMargin: 12
+            }
             Text {
                 id: decryptedPlatform
                 text: qsTr("Platform:" + decryptPlatform(platform.text))
