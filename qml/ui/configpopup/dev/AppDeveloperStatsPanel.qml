@@ -64,14 +64,14 @@ Rectangle {
                         case 20: return "x86";
                         case 30: return "rpi";
                         case 31: return "rpi 4";
-                        case 31: return "rpi 3";
-                        case 31: return "rpi 2";
-                        case 31: return "rpi 1";
-                        case 31: return "rpi 0";
+                        case 32: return "rpi 3";
+                        case 33: return "rpi 2";
+                        case 34: return "rpi 1";
+                        case 35: return "rpi 0";
                         case 40: return "rock";
-                        case 40: return "rk3566";
-                        case 40: return "rock5a";
-                        case 40: return "rock5b";
+                        case 41: return "rk3566";
+                        case 42: return "rock5a";
+                        case 43: return "rock5b";
                         default: return "unknown";
                     }
                 }
