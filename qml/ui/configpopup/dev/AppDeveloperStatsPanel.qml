@@ -70,7 +70,7 @@ Rectangle {
             }
             Text {
                 id: identMessage
-                text: qsTr("IdentID:" + _ohdSystemAir.set_ohd_sys_ident)
+                text: qsTr("IdentID:" + _ohdSystemAir.ohd_sys_type)
                 Layout.leftMargin: 12
             }
             Text {
