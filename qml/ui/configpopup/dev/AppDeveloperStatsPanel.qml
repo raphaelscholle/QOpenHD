@@ -54,13 +54,23 @@ Rectangle {
             anchors.margins: 10
 
             Text {
-                id: identMessage
-                text: qsTr("Encrypted:" + _ohdSystemAir.link_type)
+                id: platformMessage
+                text: qsTr("Platform:" + _ohdSystemAir.ohd_platform_type)
+                Layout.leftMargin: 12
+            }
+                Text {
+                id: camMessage
+                text: qsTr("Wifi:" + _ohdSystemAir.ohd_wifi_type)
                 Layout.leftMargin: 12
             }
             Text {
-                id: platform
-                text: qsTr("PlatformID:" + identMessage.text.substring(1, 3))
+                id: wifiMessage
+                text: qsTr("Cam:" + _ohdSystemAir.ohd_cam_type)
+                Layout.leftMargin: 12
+            }
+            Text {
+                id: identMessage
+                text: qsTr("IdentID:" + _ohdSystemAir.set_ohd_sys_ident)
                 Layout.leftMargin: 12
             }
             Text {
