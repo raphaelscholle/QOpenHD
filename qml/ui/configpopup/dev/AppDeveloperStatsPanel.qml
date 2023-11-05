@@ -63,12 +63,20 @@ Rectangle {
                         case 10: return "X20";
                         case 20: return "x86";
                         case 30: return "rpi";
+                        case 31: return "rpi 4";
+                        case 31: return "rpi 3";
+                        case 31: return "rpi 2";
+                        case 31: return "rpi 1";
+                        case 31: return "rpi 0";
                         case 40: return "rock";
+                        case 40: return "rk3566";
+                        case 40: return "rock5a";
+                        case 40: return "rock5b";
                         default: return "unknown";
                     }
                 }
 
-                text: "Platform: " + platformName(platformCode) +  _ohdSystemAir.ohd_platform_type
+                text: "Platform: " + platformName(platformCode) + "("+_ohdSystemAir.ohd_platform_type+")"
                 Layout.leftMargin: 12
             }
 
