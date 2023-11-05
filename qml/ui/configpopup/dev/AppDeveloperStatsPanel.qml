@@ -54,7 +54,7 @@ Rectangle {
             anchors.margins: 10
 
             Text {
-                id: test1
+                id: test0
                 text: qsTr("Encrypted:" + _ohdSystemAir.link_type)
                 Layout.leftMargin: 12
             }
