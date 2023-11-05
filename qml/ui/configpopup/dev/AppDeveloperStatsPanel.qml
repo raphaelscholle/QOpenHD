@@ -68,7 +68,7 @@ Rectangle {
                     }
                 }
 
-                text: "Platform: " + platformName(platformCode)
+                text: "Platform: " + platformName(platformCode) +  _ohdSystemAir.ohd_platform_type
                 Layout.leftMargin: 12
             }
 
