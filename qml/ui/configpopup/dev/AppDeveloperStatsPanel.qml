@@ -81,13 +81,39 @@ Rectangle {
             }
 
             Text {
-            id: camMessage
-            text: qsTr("Wifi:" + _ohdSystemAir.ohd_wifi_type)
+            id: camMessagePi
+            visible: [30, 31, 32, 33, 34, 35].indexOf(_ohdSystemAir.ohd_platform_type) !== -1
+            property int camCode: _ohdSystemAir.ohd_cam_type
+
+                function camName(code) {
+                    switch (code) {
+                        case 11: return "OV5647";
+                        case 12: return "imx219";
+                        case 13: return "imx477";
+                        case 14: return "hdmi";
+                        case 21: return "IMX462m";
+                        case 22: return "IMX477m";
+                        case 23: return "IMX708";
+                        case 24: return "IMX519";
+                        case 25: return "IMX477";
+                        case 26: return "IMX462";
+                        case 27: return "IMX327";
+                        case 28: return "IMX290";
+                        case 29: return "libcamera";
+                        case 31: return "veye 2MP";
+                        case 32: return "veye CSIMX307";
+                        case 33: return "veye CSSC132";
+                        case 34: return "veye MVCAM";
+                        default: return "unknown";
+                    }
+                }
+
+                text: "Platform: " + camName(camCode) + "("+_ohdSystemAir.ohd_cam_type+")"
             Layout.leftMargin: 12
             }
             Text {
                 id: wifiMessage
-                text: qsTr("Cam:" + _ohdSystemAir.ohd_cam_type)
+                text: qsTr("Wifi:" + _ohdSystemAir.ohd_wifi_type)
                 Layout.leftMargin: 12
             }
             Text {
