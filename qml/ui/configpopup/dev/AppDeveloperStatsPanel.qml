@@ -141,6 +141,53 @@ Rectangle {
             Layout.leftMargin: 12
             }
             Text {
+            id: camMessageX86
+            visible: [20].indexOf(_ohdSystemAir.ohd_platform_type) !== -1
+            property int camCode: _ohdSystemAir.ohd_cam_type
+
+                function camName(code) {
+                    switch (code) {
+                        case 11: return "generic";
+                        default: return "unknown";
+                    }
+                }
+                text: "Camera: " + camName(camCode) + "("+_ohdSystemAir.ohd_cam_type+")"
+            Layout.leftMargin: 12
+            }
+            Text {
+            id: camMessageRock5
+            visible: [42, 43].indexOf(_ohdSystemAir.ohd_platform_type) !== -1
+            property int camCode: _ohdSystemAir.ohd_cam_type
+
+                function camName(code) {
+                    switch (code) {
+                        case 11: return "imx219";
+                        case 12: return "imx462";
+                        case 13: return "imx708";
+                        case 14: return "hdmi";
+                        default: return "unknown";
+                    }
+                }
+                text: "Camera: " + camName(camCode) + "("+_ohdSystemAir.ohd_cam_type+")"
+            Layout.leftMargin: 12
+            }
+            Text {
+            id: camMessageRock3
+            visible: [41].indexOf(_ohdSystemAir.ohd_platform_type) !== -1
+            property int camCode: _ohdSystemAir.ohd_cam_type
+
+                function camName(code) {
+                    switch (code) {
+                        case 11: return "imx219";
+                        case 12: return "imx462";
+                        case 13: return "imx708";
+                        default: return "unknown";
+                    }
+                }
+                text: "Camera: " + camName(camCode) + "("+_ohdSystemAir.ohd_cam_type+")"
+            Layout.leftMargin: 12
+            }
+            Text {
                 id: identMessage
                 text: qsTr("IdentID:" + _ohdSystemAir.ohd_sys_type)
                 Layout.leftMargin: 12
