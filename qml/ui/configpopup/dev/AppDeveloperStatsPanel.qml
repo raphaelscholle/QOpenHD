@@ -79,6 +79,22 @@ Rectangle {
                 text: "Platform: " + platformName(platformCode) + "("+_ohdSystemAir.ohd_platform_type+")"
                 Layout.leftMargin: 12
             }
+             Text {
+                id: wifiMessage
+                property int wifiCode: _ohdSystemAir.ohd_wifi_type
+
+                function wifiName(code) {
+                    switch (code) {
+                        case 11: return "Asus AC56";
+                        case 12: return "8812AU CUSTOM";
+                        case 21: return "88XXBU";
+                        default: return "unknown";
+                    }
+                }
+
+                text: "Wifi: " + wifiName(wifiCode) + "("+_ohdSystemAir.ohd_wifi_type+")"
+                Layout.leftMargin: 12
+            }
 
             Text {
             id: camMessagePi
