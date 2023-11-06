@@ -18,10 +18,12 @@ BaseWidget {
     widgetIdentifier: "sidebar"
     bw_verbose_name: "SIDEBAR"
     property int secondaryUiWidth: 335
-    property int secondaryUiHeight: 335
+    property int secondaryUiHeight: 375
     property string secondaryUiColor: "#000"
-    property real secondaryUiOpacity: 0.85
-    property int secondaryUizPos: 999
+    property real secondaryUiOpacity: 0.75
+    property string mainDarkColor: "#302f30"
+    property string highlightColor: "#555"
+    property string mcsValue:"3"
 
 
     property int selectedItemIndex: -1
@@ -31,7 +33,6 @@ BaseWidget {
         width: 32
         height: 32
         y: (googleUI.height/2)-(uiButton.height/2)
-        z: 99
 
         MouseArea {
             id: mouseArea1
@@ -42,13 +43,12 @@ BaseWidget {
                 googleUI.visible = true
                 linkUI.visible = true
                 uiButton.visible = false
-                // Perform button action here or emit a signal
             }
 
             Rectangle {
                 width: parent.width
                 height: parent.height
-                color: "transparent" // Transparent background
+                color: "transparent"
 
                 RowLayout {
                     width: parent.width
@@ -78,20 +78,22 @@ BaseWidget {
 
             Rectangle {
                 id: googleUI
-                width: 32
-                height: 335
-                color: "#302f30"
+                width: secondaryUiHeight / 8 //number of items
+                height: secondaryUiHeight
+                color: highlightColor
                 opacity: 0.7
                 visible: false
-                z: 99
+
+                property int selectedItemIndex: 0
 
                 ListView {
                     width: parent.width
                     height: parent.height
                     focus: true
-                    //snapMode: ListView.SnapOneItem
+
                     model: ListModel {
                         ListElement { text: " \uf1eb"; subText: "link" }
+                        ListElement { text: " \uf11b"; subText: "rc" }
                         ListElement { text: " \uf03d"; subText: "video" }
                         ListElement { text: " \uf030"; subText: "camera" }
                         ListElement { text: " \uf0c7"; subText: "recording" }
@@ -102,13 +104,14 @@ BaseWidget {
 
                     delegate: Item {
                         width: parent.width
-                        height: 48
+                        height: secondaryUiHeight / 8 //number of items
 
                         MouseArea {
                             id: mouseArea
                             anchors.fill: parent
 
                             onClicked: {
+                                googleUI.selectedItemIndex = index;
 
                                 function hideElements() {
                                     linkUI.visible = false;
@@ -117,45 +120,43 @@ BaseWidget {
                                     recordingUI.visible = false;
                                     displayUI.visible = false;
                                     miscUI.visible = false;
+                                    rcUI.visible = false;
                                 }
 
-                                sidebar.selectedItemIndex = index;
                                 console.log("Item clicked: " + model.subText)
                                 var uiElementName = model.subText + "UI";
-                                if (model.subText==="back"){
-                                    googleUI.visible=false
-                                    uiButton.visible=true
+                                if (model.subText === "back") {
+                                    googleUI.visible = false;
+                                    uiButton.visible = true;
                                     hideElements();
-                                }
-                                else if (model.subText==="link"){
+                                } else if (model.subText === "link") {
                                     hideElements();
                                     linkUI.visible = true;
-                                }
-                                else if (model.subText==="video"){
+                                } else if (model.subText === "rc") {
+                                    hideElements();
+                                    rcUI.visible = true;
+                                } else if (model.subText === "video") {
                                     hideElements();
                                     videoUI.visible = true;
-                                }
-                                else if (model.subText==="camera"){
+                                } else if (model.subText === "camera") {
                                     hideElements();
                                     cameraUI.visible = true;
-                                }
-                                else if (model.subText==="recording"){
+                                } else if (model.subText === "recording") {
                                     hideElements();
                                     recordingUI.visible = true;
-                                }
-                                else if (model.subText==="display"){
+                                } else if (model.subText === "display") {
                                     hideElements();
                                     displayUI.visible = true;
-                                }
-                                else if (model.subText==="drone"){
+                                } else if (model.subText === "drone") {
                                     hideElements();
                                     miscUI.visible = true;
                                 }
                             }
+
                             Rectangle {
                                 width: parent.width
                                 height: parent.height
-                                color: index === sidebar.selectedItemIndex ? "#555" : "#302f30"
+                                color: index === googleUI.selectedItemIndex ? highlightColor : mainDarkColor
                             }
 
                             RowLayout {
@@ -164,15 +165,17 @@ BaseWidget {
 
                                 Text {
                                     text: model.text
-                                    font.pixelSize: 16
+                                    font.pixelSize: secondaryUiHeight / 16
                                     opacity: 1.0
                                     font.family: "Font Awesome 5 Free"
                                     color: "white"
+                                    horizontalAlignment: Text.AlignHCenter
+                                    verticalAlignment: Text.AlignVCenter
                                 }
                                 Text {
                                     text: model.subText
                                     visible: false
-                                    font.pixelSize: 16
+                                    font.pixelSize: secondaryUiHeight / 16
                                     opacity: 1.0
                                     color: "white"
                                     horizontalAlignment: Text.AlignHCenter
@@ -194,8 +197,25 @@ BaseWidget {
                 color: secondaryUiColor
                 opacity: secondaryUiOpacity
                 visible: false
-                z: secondaryUizPos
+                Rectangle {
+                        id: linkUiHeader
+                        width: secondaryUiWidth
+                        height: secondaryUiHeight/8
+                        color: highlightColor
+                        opacity: 1.0
+
+                        Text {
+                            anchors.centerIn: parent
+                            text: "LINK"
+                            font.pixelSize: 21
+                            font.family: "AvantGarde-Medium"
+                            color: "#ffffff"
+                            smooth: true
+                        }
+                    }
                 Item {
+                    anchors.top: parent.top
+                    anchors.topMargin: linkUiHeader.height/2
                     width: parent.width
                     height: parent.height
 
@@ -204,7 +224,7 @@ BaseWidget {
                         spacing: 5
 
                         Text{
-                            text: "Resilliancy -> Quality"
+                            text: "Range -> Quality" + "  (MCS" + mcsValue + ")"
                             font.pixelSize: 14
                             font.family: "AvantGarde-Medium"
                             color: "#ffffff"
@@ -281,14 +301,31 @@ BaseWidget {
                 }
             }
             Rectangle {
-                id: videoUI
+                id: rcUI
                 width: secondaryUiWidth
                 height: secondaryUiHeight
                 color: secondaryUiColor
                 opacity: secondaryUiOpacity
                 visible: false
-                z: secondaryUizPos
+                Rectangle {
+                        id: rcUiHeader
+                        width: secondaryUiWidth
+                        height: secondaryUiHeight/8
+                        color: highlightColor
+                        opacity: 1.0
+
+                        Text {
+                            anchors.centerIn: parent
+                            text: "RemoteControl"
+                            font.pixelSize: 21
+                            font.family: "AvantGarde-Medium"
+                            color: "#ffffff"
+                            smooth: true
+                        }
+                    }
                 Item {
+                    anchors.top: parent.top
+                    anchors.topMargin: rcUiHeader.height/2
                     width: parent.width
                     height: parent.height
 
@@ -369,15 +406,136 @@ BaseWidget {
                 }
             }
             Rectangle {
+                id: videoUI
+                width: secondaryUiWidth
+                height: secondaryUiHeight
+                color: secondaryUiColor
+                opacity: secondaryUiOpacity
+                visible: false
+                Rectangle {
+                        id: videoUiHeader
+                        width: secondaryUiWidth
+                        height: secondaryUiHeight/8
+                        color: highlightColor
+                        opacity: 1.0
+
+                        Text {
+                            anchors.centerIn: parent
+                            text: "Video"
+                            font.pixelSize: 21
+                            font.family: "AvantGarde-Medium"
+                            color: "#ffffff"
+                            smooth: true
+                        }
+                    }
+                Item {
+                    anchors.top: parent.top
+                    anchors.topMargin: videoUiHeader.height/2
+                    width: parent.width
+                    height: parent.height
+
+                    Column {
+                        anchors.centerIn: parent
+                        spacing: 5
+
+                        ComboBox {
+                            id:raspberryCams3
+                            visible: true
+                            width: 200
+                            model: [ "IMX708","IMX462","IMX477" ]
+                        }
+                        ComboBox {
+                            id:rock5Cams3
+                            visible: false
+                            width: 200
+                            model: [ "IMX415","IMX462","IMX708" ]
+                        }
+                        Text{
+                            text: "Resolution 480p -> 1080p"
+                            font.pixelSize: 14
+                            font.family: "AvantGarde-Medium"
+                            color: "#ffffff"
+                            smooth: true
+                        }
+                        Slider {
+                            id: resolutionSlider3
+                            from: 0
+                            to: 2
+                            stepSize: 1
+                            //snapMode: Slider.SnapToStep
+                            value: 0 // Initial value
+                            Material.accent: Material.Grey
+                            onValueChanged: {
+                                console.log("Resolution Slider:", value)
+                            }
+                        }
+                        Text{
+                            text: "Framerate 30 -> 60"
+                            font.pixelSize: 14
+                            font.family: "AvantGarde-Medium"
+                            color: "#ffffff"
+                            smooth: true
+                        }
+                        Slider {
+                            id: framerateSlider3
+                            from: 0
+                            to: 2
+                            stepSize: 1
+                            //snapMode: Slider.SnapToStep
+                            value: 0 // Initial value
+                            Material.accent: Material.Grey
+                            onValueChanged: {
+                                console.log("Framerate Slider:", value)
+                            }
+                        }
+                        Text{
+                            text: "Bitrate"
+                            font.pixelSize: 14
+                            font.family: "AvantGarde-Medium"
+                            color: "#ffffff"
+                            smooth: true
+                        }
+                        Slider {
+                            id: bitrateSlider3
+                            from: 2
+                            to: 18
+                            stepSize: 2
+                            //snapMode: Slider.SnapToStep
+                            value: 8 // Initial value
+                            Material.accent: Material.Grey
+                            onValueChanged: {
+                                console.log("Birtate Slider:", value)
+                            }
+                        }
+                    }
+                }
+            }
+            Rectangle {
                 id: cameraUI
                 width: secondaryUiWidth
                 height: secondaryUiHeight
                 color: secondaryUiColor
                 opacity: secondaryUiOpacity
                 visible: false
-                z: secondaryUizPos
+                Rectangle {
+                        id: cameraUiHeader
+                        width: secondaryUiWidth
+                        height: secondaryUiHeight/8
+                        color: highlightColor
+                        opacity: 1.0
 
+                        Text {
+                            anchors.centerIn: parent
+                            text: "Camera"
+                            font.pixelSize: 21
+                            font.family: "AvantGarde-Medium"
+                            color: "#ffffff"
+                            smooth: true
+                        }
+                    }
                 Item {
+                    anchors.top: parent.top
+                    anchors.topMargin: cameraUiHeader.height/2
                     width: parent.width
                     height: parent.height
 
@@ -451,9 +609,25 @@ BaseWidget {
                 color: secondaryUiColor
                 opacity: secondaryUiOpacity
                 visible: false
-                z: secondaryUizPos
+                Rectangle {
+                        id: recordingUiHeader
+                        width: secondaryUiWidth
+                        height: secondaryUiHeight/8
+                        color: highlightColor
+                        opacity: 1.0
 
+                        Text {
+                            anchors.centerIn: parent
+                            text: "Recording"
+                            font.pixelSize: 21
+                            font.family: "AvantGarde-Medium"
+                            color: "#ffffff"
+                            smooth: true
+                        }
+                    }
                 Item {
+                    anchors.top: parent.top
+                    anchors.topMargin: recordingUiHeader.height/2
                     width: parent.width
                     height: parent.height
 
@@ -538,9 +712,25 @@ BaseWidget {
                 color: secondaryUiColor
                 opacity: secondaryUiOpacity
                 visible: false
-                z: secondaryUizPos
+                Rectangle {
+                        id: displayUiHeader
+                        width: secondaryUiWidth
+                        height: secondaryUiHeight/8
+                        color: highlightColor
+                        opacity: 1.0
 
+                        Text {
+                            anchors.centerIn: parent
+                            text: "Display"
+                            font.pixelSize: 21
+                            font.family: "AvantGarde-Medium"
+                            color: "#ffffff"
+                            smooth: true
+                        }
+                    }
                 Item {
+                    anchors.top: parent.top
+                    anchors.topMargin: displayUiHeader.height/2
                     width: parent.width
                     height: parent.height
 
@@ -605,9 +795,25 @@ BaseWidget {
                 color: secondaryUiColor
                 opacity: secondaryUiOpacity
                 visible: false
-                z: secondaryUizPos
+                Rectangle {
+                        id: miscUiHeader
+                        width: secondaryUiWidth
+                        height: secondaryUiHeight/8
+                        color: highlightColor
+                        opacity: 1.0
 
+                        Text {
+                            anchors.centerIn: parent
+                            text: "Miscellaneous "
+                            font.pixelSize: 21
+                            font.family: "AvantGarde-Medium"
+                            color: "#ffffff"
+                            smooth: true
+                        }
+                    }
                 Item {
+                    anchors.top: parent.top
+                    anchors.topMargin: miscUiHeader.height/2
                     width: parent.width
                     height: parent.height
 
@@ -733,7 +939,11 @@ BaseWidget {
                         Button {
                             id: button
                             text: "Advanced Menu"
+
+                            onClicked: {
+                                settings_panel.visible = true
                             }
+                        }
                     }
                 }
             }
