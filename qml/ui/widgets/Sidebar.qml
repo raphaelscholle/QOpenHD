@@ -24,6 +24,7 @@ BaseWidget {
     property string mainDarkColor: "#302f30"
     property string highlightColor: "#555"
     property string mcsValue:"3"
+    property int refreshRate: Qt.application.primaryScreen.refreshRate
 
 
     property int selectedItemIndex: -1
@@ -84,6 +85,7 @@ BaseWidget {
                 opacity: 0.7
                 visible: false
 
+                // Add a property to track the selected item index
                 property int selectedItemIndex: 0
 
                 ListView {
@@ -111,6 +113,7 @@ BaseWidget {
                             anchors.fill: parent
 
                             onClicked: {
+                                // Update the selected item index
                                 googleUI.selectedItemIndex = index;
 
                                 function hideElements() {
@@ -840,6 +843,26 @@ BaseWidget {
 
                             }
                         }
+                        RowLayout {
+                            Text {
+                                text: "WindowSize:"
+                                font.pixelSize: 14
+                                font.bold: true
+                                font.family: "AvantGarde-Medium"
+                                color: "#ffffff"
+                                smooth: true
+                            }
+
+                            Text {
+                                text: applicationWindow.height + "x" + applicationWindow.width
+                                font.pixelSize: 14
+                                font.family: "AvantGarde-Medium"
+                                color: "#ffffff"
+                                smooth: true
+
+                            }
+                        }
+
                         RowLayout {
                             Text {
                                 text: "Frequency:"
