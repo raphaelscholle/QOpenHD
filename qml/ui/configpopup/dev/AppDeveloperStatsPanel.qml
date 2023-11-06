@@ -123,14 +123,22 @@ Rectangle {
                         default: return "unknown";
                     }
                 }
-
-                text: "Platform: " + camName(camCode) + "("+_ohdSystemAir.ohd_cam_type+")"
-            Layout.leftMargin: 12
+                text: "Camera: " + camName(camCode) + "("+_ohdSystemAir.ohd_cam_type+")"
+                Layout.leftMargin: 12
             }
             Text {
-                id: wifiMessage
-                text: qsTr("Wifi:" + _ohdSystemAir.ohd_wifi_type)
-                Layout.leftMargin: 12
+            id: camMessageX20
+            visible: [10].indexOf(_ohdSystemAir.ohd_platform_type) !== -1
+            property int camCode: _ohdSystemAir.ohd_cam_type
+
+                function camName(code) {
+                    switch (code) {
+                        case 11: return "HDZERO";
+                        default: return "unknown";
+                    }
+                }
+                text: "Camera: " + camName(camCode) + "("+_ohdSystemAir.ohd_cam_type+")"
+            Layout.leftMargin: 12
             }
             Text {
                 id: identMessage
