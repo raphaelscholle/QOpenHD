@@ -207,21 +207,21 @@ BaseWidget {
                 opacity: secondaryUiOpacity
                 visible: false
                 Rectangle {
-                        id: linkUiHeader
-                        width: secondaryUiWidth
-                        height: secondaryUiHeight/8
-                        color: highlightColor
-                        opacity: 1.0
+                    id: linkUiHeader
+                    width: secondaryUiWidth
+                    height: secondaryUiHeight/8
+                    color: highlightColor
+                    opacity: 1.0
 
-                        Text {
-                            anchors.centerIn: parent
-                            text: "LINK"
-                            font.pixelSize: 21
-                            font.family: "AvantGarde-Medium"
-                            color: "#ffffff"
-                            smooth: true
-                        }
+                    Text {
+                        anchors.centerIn: parent
+                        text: "LINK"
+                        font.pixelSize: 21
+                        font.family: "AvantGarde-Medium"
+                        color: "#ffffff"
+                        smooth: true
                     }
+                }
                 Item {
                     anchors.top: parent.top
                     anchors.topMargin: linkUiHeader.height/2
@@ -264,24 +264,24 @@ BaseWidget {
                             model: [ "2312", "2332", "2352", "2372", "2392", "2412", "2432", "2452", "2472", "2492", "2512", "2532", "2572", "2592", "2612", "2632", "2652", "2672", "2692", "2712", "5180", "5200", "5220", "5240", "5260", "5280", "5300", "5320", "5500", "5520", "5540", "5560", "5580", "5600", "5620", "5640", "5660", "5680", "5700", "5745", "5765", "5785", "5805", "5825", "5845", "5865", "5885" ]
                         }
                         Text{
-                                text: "TX Power"
-                                font.pixelSize: 14
-                                font.family: "AvantGarde-Medium"
-                                color: "#ffffff"
-                                smooth: true
+                            text: "TX Power"
+                            font.pixelSize: 14
+                            font.family: "AvantGarde-Medium"
+                            color: "#ffffff"
+                            smooth: true
+                        }
+                        Slider {
+                            id: txPowerSlider
+                            from: 22
+                            to: 58
+                            stepSize: 4
+                            //snapMode: Slider.SnapToStep
+                            value: 22 // Initial value
+                            Material.accent: Material.Grey
+                            onValueChanged: {
+                                // Handle the slider value change here
+                                console.log("TX Power Slider:", value)
                             }
-                            Slider {
-                                id: txPowerSlider
-                                from: 22
-                                to: 58
-                                stepSize: 4
-                                //snapMode: Slider.SnapToStep
-                                value: 22 // Initial value
-                                Material.accent: Material.Grey
-                                onValueChanged: {
-                                    // Handle the slider value change here
-                                    console.log("TX Power Slider:", value)
-                                }
                         }
                         Text{
                             text: "Bandwith"
@@ -317,21 +317,21 @@ BaseWidget {
                 opacity: secondaryUiOpacity
                 visible: false
                 Rectangle {
-                        id: rcUiHeader
-                        width: secondaryUiWidth
-                        height: secondaryUiHeight/8
-                        color: highlightColor
-                        opacity: 1.0
+                    id: rcUiHeader
+                    width: secondaryUiWidth
+                    height: secondaryUiHeight/8
+                    color: highlightColor
+                    opacity: 1.0
 
-                        Text {
-                            anchors.centerIn: parent
-                            text: "RemoteControl"
-                            font.pixelSize: 21
-                            font.family: "AvantGarde-Medium"
-                            color: "#ffffff"
-                            smooth: true
-                        }
+                    Text {
+                        anchors.centerIn: parent
+                        text: "RemoteControl"
+                        font.pixelSize: 21
+                        font.family: "AvantGarde-Medium"
+                        color: "#ffffff"
+                        smooth: true
                     }
+                }
                 Item {
                     anchors.top: parent.top
                     anchors.topMargin: rcUiHeader.height/2
@@ -422,21 +422,21 @@ BaseWidget {
                 opacity: secondaryUiOpacity
                 visible: false
                 Rectangle {
-                        id: videoUiHeader
-                        width: secondaryUiWidth
-                        height: secondaryUiHeight/8
-                        color: highlightColor
-                        opacity: 1.0
+                    id: videoUiHeader
+                    width: secondaryUiWidth
+                    height: secondaryUiHeight/8
+                    color: highlightColor
+                    opacity: 1.0
 
-                        Text {
-                            anchors.centerIn: parent
-                            text: "Video"
-                            font.pixelSize: 21
-                            font.family: "AvantGarde-Medium"
-                            color: "#ffffff"
-                            smooth: true
-                        }
+                    Text {
+                        anchors.centerIn: parent
+                        text: "Video"
+                        font.pixelSize: 21
+                        font.family: "AvantGarde-Medium"
+                        color: "#ffffff"
+                        smooth: true
                     }
+                }
                 Item {
                     anchors.top: parent.top
                     anchors.topMargin: videoUiHeader.height/2
@@ -527,21 +527,21 @@ BaseWidget {
                 opacity: secondaryUiOpacity
                 visible: false
                 Rectangle {
-                        id: cameraUiHeader
-                        width: secondaryUiWidth
-                        height: secondaryUiHeight/8
-                        color: highlightColor
-                        opacity: 1.0
+                    id: cameraUiHeader
+                    width: secondaryUiWidth
+                    height: secondaryUiHeight/8
+                    color: highlightColor
+                    opacity: 1.0
 
-                        Text {
-                            anchors.centerIn: parent
-                            text: "Camera"
-                            font.pixelSize: 21
-                            font.family: "AvantGarde-Medium"
-                            color: "#ffffff"
-                            smooth: true
-                        }
+                    Text {
+                        anchors.centerIn: parent
+                        text: "Camera"
+                        font.pixelSize: 21
+                        font.family: "AvantGarde-Medium"
+                        color: "#ffffff"
+                        smooth: true
                     }
+                }
                 Item {
                     anchors.top: parent.top
                     anchors.topMargin: cameraUiHeader.height/2
@@ -619,21 +619,21 @@ BaseWidget {
                 opacity: secondaryUiOpacity
                 visible: false
                 Rectangle {
-                        id: recordingUiHeader
-                        width: secondaryUiWidth
-                        height: secondaryUiHeight/8
-                        color: highlightColor
-                        opacity: 1.0
+                    id: recordingUiHeader
+                    width: secondaryUiWidth
+                    height: secondaryUiHeight/8
+                    color: highlightColor
+                    opacity: 1.0
 
-                        Text {
-                            anchors.centerIn: parent
-                            text: "Recording"
-                            font.pixelSize: 21
-                            font.family: "AvantGarde-Medium"
-                            color: "#ffffff"
-                            smooth: true
-                        }
+                    Text {
+                        anchors.centerIn: parent
+                        text: "Recording"
+                        font.pixelSize: 21
+                        font.family: "AvantGarde-Medium"
+                        color: "#ffffff"
+                        smooth: true
                     }
+                }
                 Item {
                     anchors.top: parent.top
                     anchors.topMargin: recordingUiHeader.height/2
@@ -722,21 +722,21 @@ BaseWidget {
                 opacity: secondaryUiOpacity
                 visible: false
                 Rectangle {
-                        id: displayUiHeader
-                        width: secondaryUiWidth
-                        height: secondaryUiHeight/8
-                        color: highlightColor
-                        opacity: 1.0
+                    id: displayUiHeader
+                    width: secondaryUiWidth
+                    height: secondaryUiHeight/8
+                    color: highlightColor
+                    opacity: 1.0
 
-                        Text {
-                            anchors.centerIn: parent
-                            text: "Display"
-                            font.pixelSize: 21
-                            font.family: "AvantGarde-Medium"
-                            color: "#ffffff"
-                            smooth: true
-                        }
+                    Text {
+                        anchors.centerIn: parent
+                        text: "Display"
+                        font.pixelSize: 21
+                        font.family: "AvantGarde-Medium"
+                        color: "#ffffff"
+                        smooth: true
                     }
+                }
                 Item {
                     anchors.top: parent.top
                     anchors.topMargin: displayUiHeader.height/2
@@ -805,21 +805,21 @@ BaseWidget {
                 opacity: secondaryUiOpacity
                 visible: false
                 Rectangle {
-                        id: miscUiHeader
-                        width: secondaryUiWidth
-                        height: secondaryUiHeight/8
-                        color: highlightColor
-                        opacity: 1.0
+                    id: miscUiHeader
+                    width: secondaryUiWidth
+                    height: secondaryUiHeight/8
+                    color: highlightColor
+                    opacity: 1.0
 
-                        Text {
-                            anchors.centerIn: parent
-                            text: "Miscellaneous "
-                            font.pixelSize: 21
-                            font.family: "AvantGarde-Medium"
-                            color: "#ffffff"
-                            smooth: true
-                        }
+                    Text {
+                        anchors.centerIn: parent
+                        text: "Miscellaneous "
+                        font.pixelSize: 21
+                        font.family: "AvantGarde-Medium"
+                        color: "#ffffff"
+                        smooth: true
                     }
+                }
                 Item {
                     anchors.top: parent.top
                     anchors.topMargin: miscUiHeader.height/2
@@ -880,12 +880,39 @@ BaseWidget {
                             }
 
                             Text {
-                                text: _ohdSystemGround.curr_channel_mhz
+                                text: _ohdSystemGround.curr_channel_mhz + "Mhz"
                                 font.pixelSize: 14
                                 font.family: "AvantGarde-Medium"
                                 color: "#ffffff"
                                 smooth: true
 
+                            }
+                        }
+                        RowLayout {
+                            Text {
+                                text: "Wifi-Adapter:"
+                                font.pixelSize: 14
+                                font.bold: true
+                                font.family: "AvantGarde-Medium"
+                                color: "#ffffff"
+                                smooth: true
+                            }
+
+                            Text {
+                                id: wifiMessage
+                                property int wifiCode: _ohdSystemAir.ohd_wifi_type
+
+                                function wifiName(code) {
+                                    switch (code) {
+                                    case 11: return "Asus AC56";
+                                    case 12: return "8812AU CUSTOM";
+                                    case 21: return "88XXBU";
+                                    default: return "unknown";
+                                    }
+                                }
+
+                                text: wifiName(wifiCode) + "("+_ohdSystemAir.ohd_wifi_type+")"
+                                Layout.leftMargin: 12
                             }
                         }
                         RowLayout {
@@ -928,7 +955,7 @@ BaseWidget {
                         }
                         RowLayout {
                             Text {
-                                text: "Hardware Ground:"
+                                text: "Hardware Air:"
                                 font.pixelSize: 14
                                 font.bold: true
                                 font.family: "AvantGarde-Medium"
@@ -937,17 +964,35 @@ BaseWidget {
                             }
 
                             Text {
-                                text: "X86"
-                                font.pixelSize: 14
-                                font.family: "AvantGarde-Medium"
-                                color: "#ffffff"
-                                smooth: true
+                                id: platformMessage
+                                property int platformCode: _ohdSystemAir.ohd_platform_type
 
+                                function platformName(code) {
+                                    switch (code) {
+                                    case 0: return "unknown";
+                                    case 10: return "X20";
+                                    case 20: return "x86";
+                                    case 30: return "rpi";
+                                    case 31: return "rpi 4";
+                                    case 32: return "rpi 3";
+                                    case 33: return "rpi 2";
+                                    case 34: return "rpi 1";
+                                    case 35: return "rpi 0";
+                                    case 40: return "rock";
+                                    case 41: return "rk3566";
+                                    case 42: return "rock5a";
+                                    case 43: return "rock5b";
+                                    default: return "unknown";
+                                    }
+                                }
+
+                                text: platformName(platformCode) + "("+_ohdSystemAir.ohd_platform_type+")"
+                                Layout.leftMargin: 12
                             }
                         }
                         RowLayout {
                             Text {
-                                text: "Hardware Air:"
+                                text: "Hardware Ground:"
                                 font.pixelSize: 14
                                 font.bold: true
                                 font.family: "AvantGarde-Medium"
