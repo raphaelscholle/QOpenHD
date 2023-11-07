@@ -34,6 +34,7 @@ BaseWidget {
         height: 32
         anchors.verticalCenter: parent.verticalCenter
 
+
         MouseArea {
             id: mouseArea1
             Layout.fillWidth: true
