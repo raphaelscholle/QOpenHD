@@ -12,24 +12,15 @@ import OpenHD 1.0
 import "../elements"
 
 BaseWidget {
-    id: speedWidget
+    id: sidebar
     width: 64
     height: 24
-
-    visible: settings.speed_ladder_show
-
-    defaultXOffset: 20
+    visible: settings.show_sidebar
     defaultVCenter: true
-
-    widgetIdentifier: "speed_widget"
-    bw_verbose_name: "SPEED"
-
+    widgetIdentifier: "sidebar_widget"
+    bw_verbose_name: "Menu"
     defaultHCenter: false
-
-    hasWidgetDetail: true
-
-    widgetDetailHeight: 250+150
-    m_show_grid_when_dragging: true
+    hasWidgetDetail: false
     
     property int secondaryUiWidth: 335
     property int secondaryUiHeight: 375
