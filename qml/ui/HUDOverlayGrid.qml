@@ -74,7 +74,7 @@ Item {
             return;
         }
         if(m_highlight_index==0){
-            open_config_popup();
+            //open_config_popup();
         }else{
             // Open the popup of the currently "highlighted" widget
             open_close_configpopup_for_current_item()
@@ -234,13 +234,13 @@ Item {
         anchors.top: parent.top
         anchors.topMargin: 0
 
-        MouseArea {
-            id: settingsButtonMouseArea
-            anchors.fill: parent
-            onClicked: {
-                open_config_popup()
-            }
-        }
+        // MouseArea {
+        //     id: settingsButtonMouseArea
+        //     anchors.fill: parent
+        //     onClicked: {
+        //         open_config_popup()
+        //     }
+        // }
         Rectangle{
             id: settingsButtonHighlight
             border.width: 5
