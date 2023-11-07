@@ -75,6 +75,8 @@ BaseWidget {
     ColumnLayout {
         spacing: 10
         visible: true
+        anchors.verticalCenter: parent.verticalCenter
+
 
 
         RowLayout {
