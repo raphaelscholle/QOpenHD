@@ -13,8 +13,7 @@ import "../elements"
 
 BaseWidget {
     id: sidebar
-    y: (applicationWindow.height/2) - (secondaryUiHeight.height/2)
-    anchors.verticalCenter: parent
+    anchors.verticalCenter: parent.verticalCenter
     visible: settings.show_sidebar
     widgetIdentifier: "sidebar"
     bw_verbose_name: "SIDEBAR"
