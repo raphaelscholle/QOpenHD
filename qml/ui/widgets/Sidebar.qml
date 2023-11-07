@@ -851,7 +851,7 @@ BaseWidget {
                         }
                         RowLayout {
                             Text {
-                                text: "WindowSize:"
+                                text: "Screen:"
                                 font.pixelSize: 14
                                 font.bold: true
                                 font.family: "AvantGarde-Medium"
@@ -880,7 +880,7 @@ BaseWidget {
                             }
 
                             Text {
-                                text: "5801"
+                                text: _ohdSystemGround.curr_channel_mhz
                                 font.pixelSize: 14
                                 font.family: "AvantGarde-Medium"
                                 color: "#ffffff"
