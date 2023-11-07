@@ -13,7 +13,8 @@ import "../elements"
 
 BaseWidget {
     id: sidebar
-    y: (applicationWindow.height/2) - (googleUI.height/2)
+    y: (applicationWindow.height/2) - (secondaryUiHeight.height/2)
+    anchors.verticalCenter: parent
     visible: settings.show_sidebar
     widgetIdentifier: "sidebar"
     bw_verbose_name: "SIDEBAR"
@@ -853,7 +854,7 @@ BaseWidget {
                             }
 
                             Text {
-                                text: applicationWindow.height + "x" + applicationWindow.width
+                                text: applicationWindow.width + "x" + applicationWindow.height
                                 font.pixelSize: 14
                                 font.family: "AvantGarde-Medium"
                                 color: "#ffffff"
