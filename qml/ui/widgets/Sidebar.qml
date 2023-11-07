@@ -24,7 +24,6 @@ BaseWidget {
     property string mainDarkColor: "#302f30"
     property string highlightColor: "#555"
     property string mcsValue:"3"
-    property int refreshRate: Qt.application.primaryScreen.refreshRate
 
 
     property int selectedItemIndex: -1
