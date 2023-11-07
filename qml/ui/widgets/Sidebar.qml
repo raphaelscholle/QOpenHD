@@ -12,11 +12,25 @@ import OpenHD 1.0
 import "../elements"
 
 BaseWidget {
-    id: sidebar
-    anchors.verticalCenter: parent.verticalCenter
-    visible: settings.show_sidebar
-    widgetIdentifier: "sidebar"
-    bw_verbose_name: "SIDEBAR"
+    id: speedWidget
+    width: 64
+    height: 24
+
+    visible: settings.speed_ladder_show
+
+    defaultXOffset: 20
+    defaultVCenter: true
+
+    widgetIdentifier: "speed_widget"
+    bw_verbose_name: "SPEED"
+
+    defaultHCenter: false
+
+    hasWidgetDetail: true
+
+    widgetDetailHeight: 250+150
+    m_show_grid_when_dragging: true
+    
     property int secondaryUiWidth: 335
     property int secondaryUiHeight: 375
     property string secondaryUiColor: "#000"
@@ -33,7 +47,6 @@ BaseWidget {
         width: 32
         height: 32
         anchors.verticalCenter: parent.verticalCenter
-
 
         MouseArea {
             id: mouseArea1
