@@ -32,7 +32,7 @@ BaseWidget {
         id: uiButton
         width: 32
         height: 32
-        anchors.verticalCenter: parent.verticalCenter
+        y: (googleUI.height/2)-(uiButton.height/2)
 
         MouseArea {
             id: mouseArea1
