@@ -28,9 +28,10 @@ BaseWidget {
     property real secondaryUiOpacity: 0.75
     property string mainDarkColor: "#302f30"
     property string highlightColor: "#555"
-    property string mcsValue:"3"
-
-
+    property int m_control_yaw : settings.control_widget_use_fc_channels ? _rcchannelsmodelfc.control_yaw : _rcchannelsmodelground.control_yaw
+    property int m_control_roll: settings.control_widget_use_fc_channels ? _rcchannelsmodelfc.control_roll : _rcchannelsmodelground.control_roll
+    property int m_control_pitch: settings.control_widget_use_fc_channels ? _rcchannelsmodelfc.control_pitch : _rcchannelsmodelground.control_pitch
+    property int m_control_throttle: settings.control_widget_use_fc_channels ? _rcchannelsmodelfc.control_throttle : _rcchannelsmodelground.control_throttle
     property int selectedItemIndex: -1
 
     ColumnLayout {
@@ -98,6 +99,8 @@ BaseWidget {
                     width: parent.width
                     height: parent.height
                     focus: true
+                    keyNavigationEnabled: true
+                    interactive: false
 
                     model: ListModel {
                         ListElement { text: " \uf1eb"; subText: "link" }
@@ -233,7 +236,7 @@ BaseWidget {
                         spacing: 5
 
                         Text{
-                            text: "Range -> Quality" + "  (MCS" + mcsValue + ")"
+                            text: "Range -> Quality" + "  (MCS" + _ohdSystemAir.curr_mcs_index + ")"
                             font.pixelSize: 14
                             font.family: "AvantGarde-Medium"
                             color: "#ffffff"
@@ -253,7 +256,7 @@ BaseWidget {
                             }
                         }
                         Text{
-                            text: "Frequency"
+                            text: "Frequency" + "   (" + _ohdSystemGround.curr_channel_mhz + ")"
                             font.pixelSize: 14
                             font.family: "AvantGarde-Medium"
                             color: "#ffffff"
@@ -264,14 +267,14 @@ BaseWidget {
                             model: [ "2312", "2332", "2352", "2372", "2392", "2412", "2432", "2452", "2472", "2492", "2512", "2532", "2572", "2592", "2612", "2632", "2652", "2672", "2692", "2712", "5180", "5200", "5220", "5240", "5260", "5280", "5300", "5320", "5500", "5520", "5540", "5560", "5580", "5600", "5620", "5640", "5660", "5680", "5700", "5745", "5765", "5785", "5805", "5825", "5845", "5865", "5885" ]
                         }
                         Text{
-                            text: "TX Power"
+                            text: "TX Power Air" + "   (" + "TODO" + ")"
                             font.pixelSize: 14
                             font.family: "AvantGarde-Medium"
                             color: "#ffffff"
                             smooth: true
                         }
                         Slider {
-                            id: txPowerSlider
+                            id: txPowerAirSlider
                             from: 22
                             to: 58
                             stepSize: 4
@@ -280,7 +283,7 @@ BaseWidget {
                             Material.accent: Material.Grey
                             onValueChanged: {
                                 // Handle the slider value change here
-                                console.log("TX Power Slider:", value)
+                                console.log("TX Power Air Slider:", value)
                             }
                         }
                         Text{
@@ -308,6 +311,23 @@ BaseWidget {
                         }
                     }
                 }
+                Rectangle {
+                    id: linkUiFooter
+                    anchors.top: parent.top
+                    anchors.topMargin: secondaryUiHeight-saveText.height-10
+                    anchors.left: parent.left
+                    anchors.leftMargin: secondaryUiWidth-saveText.width-10
+
+
+                    Text {
+                        id: saveText
+                        text: "\uf019"
+                        font.pixelSize: 21
+                        font.family: "AvantGarde-Medium"
+                        color: "#ffffff"
+                        smooth: true
+                    }
+                }
             }
             Rectangle {
                 id: rcUI
@@ -325,7 +345,7 @@ BaseWidget {
 
                     Text {
                         anchors.centerIn: parent
-                        text: "RemoteControl"
+                        text: "OpenHD-RC"
                         font.pixelSize: 21
                         font.family: "AvantGarde-Medium"
                         color: "#ffffff"
@@ -342,75 +362,89 @@ BaseWidget {
                         anchors.centerIn: parent
                         spacing: 5
 
-                        ComboBox {
-                            id:raspberryCams
-                            visible: true
-                            width: 200
-                            model: [ "IMX708","IMX462","IMX477" ]
-                        }
-                        ComboBox {
-                            id:rock5Cams
-                            visible: false
-                            width: 200
-                            model: [ "IMX415","IMX462","IMX708" ]
-                        }
                         Text{
-                            text: "Resolution 480p -> 1080p"
+                            text: "Enable RC"
                             font.pixelSize: 14
                             font.family: "AvantGarde-Medium"
                             color: "#ffffff"
                             smooth: true
                         }
-                        Slider {
-                            id: resolutionSlider
-                            from: 0
-                            to: 2
-                            stepSize: 1
-                            //snapMode: Slider.SnapToStep
-                            value: 0 // Initial value
-                            Material.accent: Material.Grey
-                            onValueChanged: {
-                                console.log("Resolution Slider:", value)
-                            }
+                        Switch {
+                            text: qsTr("")
                         }
                         Text{
-                            text: "Framerate 30 -> 60"
+                            text: "Channel 1"
                             font.pixelSize: 14
                             font.family: "AvantGarde-Medium"
                             color: "#ffffff"
                             smooth: true
                         }
-                        Slider {
-                            id: framerateSlider
-                            from: 0
-                            to: 2
-                            stepSize: 1
-                            //snapMode: Slider.SnapToStep
-                            value: 0 // Initial value
+                        ProgressBar {
+                            id: progressBar1
+                            from: 1000
+                            to: 2000
+                            value: m_control_yaw
                             Material.accent: Material.Grey
-                            onValueChanged: {
-                                console.log("Framerate Slider:", value)
-                            }
                         }
                         Text{
-                            text: "Bitrate"
+                            text: "Channel 2"
                             font.pixelSize: 14
                             font.family: "AvantGarde-Medium"
                             color: "#ffffff"
                             smooth: true
                         }
-                        Slider {
-                            id: bitrateSlider
-                            from: 2
-                            to: 18
-                            stepSize: 2
-                            //snapMode: Slider.SnapToStep
-                            value: 8 // Initial value
+                        ProgressBar {
+                            id: progressBar2
+                            from: 1000
+                            to: 2000
+                            value: m_control_yaw
                             Material.accent: Material.Grey
-                            onValueChanged: {
-                                console.log("Birtate Slider:", value)
-                            }
                         }
+                        Text{
+                            text: "Channel 3"
+                            font.pixelSize: 14
+                            font.family: "AvantGarde-Medium"
+                            color: "#ffffff"
+                            smooth: true
+                        }
+                        ProgressBar {
+                            id: progressBar3
+                            from: 1000
+                            to: 2000
+                            value: m_control_yaw
+                            Material.accent: Material.Grey
+                        }
+                        Text{
+                            text: "Channel 4"
+                            font.pixelSize: 14
+                            font.family: "AvantGarde-Medium"
+                            color: "#ffffff"
+                            smooth: true
+                        }
+                        ProgressBar {
+                            id: progressBar4
+                            from: 1000
+                            to: 2000
+                            value: m_control_yaw
+                            Material.accent: Material.Grey
+                        }
+                    }
+                }
+                Rectangle {
+                    id: rcUiFooter
+                    anchors.top: parent.top
+                    anchors.topMargin: secondaryUiHeight-saveTextRC.height-10
+                    anchors.left: parent.left
+                    anchors.leftMargin: secondaryUiWidth-saveTextRC.width-10
+
+
+                    Text {
+                        id: saveTextRC
+                        text: "\uf019"
+                        font.pixelSize: 21
+                        font.family: "AvantGarde-Medium"
+                        color: "#ffffff"
+                        smooth: true
                     }
                 }
             }
@@ -460,7 +494,7 @@ BaseWidget {
                             model: [ "IMX415","IMX462","IMX708" ]
                         }
                         Text{
-                            text: "Resolution 480p -> 1080p"
+                            text: "Camera Mode"+ "   (" + "1080p,60fps" + ")"
                             font.pixelSize: 14
                             font.family: "AvantGarde-Medium"
                             color: "#ffffff"
@@ -479,43 +513,47 @@ BaseWidget {
                             }
                         }
                         Text{
-                            text: "Framerate 30 -> 60"
+                            text: "Switch Cameras"
                             font.pixelSize: 14
                             font.family: "AvantGarde-Medium"
                             color: "#ffffff"
                             smooth: true
                         }
-                        Slider {
-                            id: framerateSlider3
-                            from: 0
-                            to: 2
-                            stepSize: 1
-                            //snapMode: Slider.SnapToStep
-                            value: 0 // Initial value
-                            Material.accent: Material.Grey
-                            onValueChanged: {
-                                console.log("Framerate Slider:", value)
+                        Switch {
+                        }
+                        TabBar {
+                            id: cameraSwitch
+                            Material.accent: "#fff"
+                            Material.foreground: "white"
+                            background: Rectangle {
+                                implicitWidth: 100
+                                implicitHeight: 40
+                                color: secondaryUiColor
+                            }
+                            TabButton {
+                                text: qsTr("Cam1")
+                            }
+                            TabButton {
+                                text: qsTr("Cam2")
                             }
                         }
-                        Text{
-                            text: "Bitrate"
-                            font.pixelSize: 14
-                            font.family: "AvantGarde-Medium"
-                            color: "#ffffff"
-                            smooth: true
-                        }
-                        Slider {
-                            id: bitrateSlider3
-                            from: 2
-                            to: 18
-                            stepSize: 2
-                            //snapMode: Slider.SnapToStep
-                            value: 8 // Initial value
-                            Material.accent: Material.Grey
-                            onValueChanged: {
-                                console.log("Birtate Slider:", value)
-                            }
-                        }
+                    }
+                }
+                Rectangle {
+                    id: videoUiFooter
+                    anchors.top: parent.top
+                    anchors.topMargin: secondaryUiHeight-saveTextVid.height-10
+                    anchors.left: parent.left
+                    anchors.leftMargin: secondaryUiWidth-saveTextVid.width-10
+
+
+                    Text {
+                        id: saveTextVid
+                        text: "\uf019"
+                        font.pixelSize: 21
+                        font.family: "AvantGarde-Medium"
+                        color: "#ffffff"
+                        smooth: true
                     }
                 }
             }
@@ -608,6 +646,23 @@ BaseWidget {
                                 console.log("Resolution Slider:", value)
                             }
                         }
+                    }
+                }
+                Rectangle {
+                    id: camUiFooter
+                    anchors.top: parent.top
+                    anchors.topMargin: secondaryUiHeight-saveTextCam.height-10
+                    anchors.left: parent.left
+                    anchors.leftMargin: secondaryUiWidth-saveTextCam.width-10
+
+
+                    Text {
+                        id: saveTextCam
+                        text: "\uf019"
+                        font.pixelSize: 21
+                        font.family: "AvantGarde-Medium"
+                        color: "#ffffff"
+                        smooth: true
                     }
                 }
             }
@@ -708,11 +763,26 @@ BaseWidget {
                             smooth: true
                         }
                         Switch {
-                            text: qsTr("Enable Recording")
                         }
                     }
                 }
+                Rectangle {
+                    id: recUiFooter
+                    anchors.top: parent.top
+                    anchors.topMargin: secondaryUiHeight-saveTextRec.height-10
+                    anchors.left: parent.left
+                    anchors.leftMargin: secondaryUiWidth-saveTextRec.width-10
 
+
+                    Text {
+                        id: saveTextRec
+                        text: "\uf019"
+                        font.pixelSize: 21
+                        font.family: "AvantGarde-Medium"
+                        color: "#ffffff"
+                        smooth: true
+                    }
+                }
             }
             Rectangle {
                 id: displayUI
@@ -730,7 +800,7 @@ BaseWidget {
 
                     Text {
                         anchors.centerIn: parent
-                        text: "Display"
+                        text: "Misc"
                         font.pixelSize: 21
                         font.family: "AvantGarde-Medium"
                         color: "#ffffff"
@@ -794,8 +864,23 @@ BaseWidget {
                         }
                     }
                 }
+                Rectangle {
+                    id: miscUiFooter
+                    anchors.top: parent.top
+                    anchors.topMargin: secondaryUiHeight-saveTextMisc.height-10
+                    anchors.left: parent.left
+                    anchors.leftMargin: secondaryUiWidth-saveTextMisc.width-10
 
 
+                    Text {
+                        id: saveTextMisc
+                        text: "\uf019"
+                        font.pixelSize: 21
+                        font.family: "AvantGarde-Medium"
+                        color: "#ffffff"
+                        smooth: true
+                    }
+                }
             }
             Rectangle {
                 id: miscUI
@@ -813,7 +898,7 @@ BaseWidget {
 
                     Text {
                         anchors.centerIn: parent
-                        text: "Miscellaneous "
+                        text: "Status "
                         font.pixelSize: 21
                         font.family: "AvantGarde-Medium"
                         color: "#ffffff"
