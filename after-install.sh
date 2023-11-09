@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-if [[ -f "/usr/local/share/openhd_platform/rock/rk3566" ]]; then
+if [[ -d "/usr/local/share/openhd_platform/rock/rk3566" ]]; then
     ln -s /etc/systemd/system/qopenhd/rock3_qopenhd.service /etc/systemd/system/qopenhd.service
     ln -s /etc/systemd/system/qopenhd/rock3_h264_decode.service /etc/systemd/system/h264_decode.service
     ln -s /etc/systemd/system/qopenhd/rock3_h265_decode.service /etc/systemd/system/h265_decode.service
-elif [[ -f "/usr/local/share/openhd_platform/rock/rock5a" ]]; then
+elif [[ -d "/usr/local/share/openhd_platform/rock/rock5a" ]]; then
     ln -s /etc/systemd/system/qopenhd/rock5_qopenhd.service /etc/systemd/system/qopenhd.service
     ln -s /etc/systemd/system/qopenhd/rock5_h264_decode.service /etc/systemd/system/h264_decode.service
     ln -s /etc/systemd/system/qopenhd/rock5_h265_decode.service /etc/systemd/system/h265_decode.service
-elif [[ -f "/usr/local/share/openhd_platform/rock/tock5b" ]]; then
+elif [[ -d "/usr/local/share/openhd_platform/rock/rock5b" ]]; then
     ln -s /etc/systemd/system/qopenhd/rock5_qopenhd.service /etc/systemd/system/qopenhd.service
     ln -s /etc/systemd/system/qopenhd/rock5_h264_decode.service /etc/systemd/system/h264_decode.service
     ln -s /etc/systemd/system/qopenhd/rock5_h265_decode.service /etc/systemd/system/h265_decode.service
