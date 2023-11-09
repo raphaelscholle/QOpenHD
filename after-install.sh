@@ -12,7 +12,7 @@ else if [[ -f "/usr/local/share/openhd_platform/rock/tock5b" ]]; then
     /etc/systemd/system/qopenhd/rock5_qopenhd.service /etc/systemd/system/qopenhd.service
     /etc/systemd/system/qopenhd/rock5_h264_decode.service /etc/systemd/system/h264_decode.service
     /etc/systemd/system/qopenhd/rock5_h265_decode.service /etc/systemd/system/h265_decode.service
-
+fi
 
 # the openhd scripts start the correct OSD depending on the distro and settings
 if [ -f /etc/systemd/system/qopenhd.service ]; then
