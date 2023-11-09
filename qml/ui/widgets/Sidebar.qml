@@ -15,7 +15,7 @@ BaseWidget {
     id: sidebar
     width: 64
     height: 24
-    visible: settings.show_sidebar
+    visible: true
     defaultVCenter: true
     widgetIdentifier: "sidebar_widget"
     bw_verbose_name: "Menu"
