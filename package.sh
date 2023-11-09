@@ -65,12 +65,10 @@ if [[ "${PACKAGE_ARCH}" = "armhf" ]]; then
 cp systemd/rpi_qopenhd.service /tmp/qopenhd/etc/systemd/system/qopenhd.service || exit 1
 cp systemd/rpi_h264_decode.service /tmp/qopenhd/etc/systemd/system/h264_decode.service || exit 1
 elif [[ "${PACKAGE_ARCH}" = "arm64" ]]; then
-cp systemd/rock5_qopenhd.service /tmp/qopenhd/etc/systemd/system/qopenhd.service || exit 1
-cp systemd/rock5_h264_decode.service /tmp/qopenhd/etc/systemd/system/h264_decode.service || exit 1
-cp systemd/rock5_h265_decode.service /tmp/qopenhd/etc/systemd/system/h265_decode.service || exit 1
-cp systemd/rock5_mjpeg_decode.service /tmp/qopenhd/etc/systemd/system/mjpeg_decode.service || exit 1
+mkdir -p /tmp/qopenhd/etc/systemd/system/qopenhd
+cp systemd/*.service /tmp/qopenhd/etc/systemd/system/qopenhd/ || exit 1
 else
-echo "X86 doesn't autostart the services"
+echo "X86 doesn't work with services"
 fi
 
 # The qt_eglfs_kms_config.json file makes sure that qopenhd runs at the res
@@ -82,7 +80,7 @@ elif [[ "${PACKAGE_ARCH}" = "arm64" ]]; then
 cp rock_qt_eglfs_kms_config.json /tmp/qopenhd/usr/local/share/qopenhd/ || exit 1
 fi
 
-VERSION="2.5.1-evo-alpha-$(date '+%Y%m%d%H%M')-${VER2}"
+VERSION="2.5.3-$(date '+%Y%m%d%H%M')-${VER2}"
 
 rm ${PACKAGE_NAME}_${VERSION}_${PACKAGE_ARCH}.deb > /dev/null 2>&1
 ls -a
