@@ -42,7 +42,7 @@ jobs:
       - name: Build Package
         run: |
           git clone https://github.com/OpenHD/ChrootCompilationTest /opt/ChrootCompilationTest
-          git clone -b ${{ github.ref_name }} https://github.com/OpenHD/QOpenHD --recursive /opt/ChrootCompilationTest/additionalFiles
+          git clone -b ${{ github.ref_name }} https://github.com/raphaelscholle/QOpenHD --recursive /opt/ChrootCompilationTest/additionalFiles
           echo $CLOUDSMITH_API_KEY > /opt/ChrootCompilationTest/additionalFiles/cloudsmith_api_key.txt
           cd /opt/ChrootCompilationTest/
           sudo apt update
