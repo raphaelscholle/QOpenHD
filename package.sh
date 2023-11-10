@@ -69,7 +69,7 @@ mkdir -p /tmp/qopenhd/etc/systemd/system/
 cp systemd/rock3_qopenhd.service /tmp/qopenhd/etc/systemd/system/qopenhd.service
 cp systemd/rock3_h264_decode.service /tmp/qopenhd/etc/systemd/system/h264_decode.service
 cp systemd/rock3_h265_decode.service /tmp/qopenhd/etc/systemd/system/h265_decode.service
-PACKAGE_NAME=qopenhd-rk3566
+PACKAGE_NAME=qopenhd_rk3566
 else
 PACKAGE_NAME=qopenhd
 echo "X86 doesn't work with services"
@@ -108,7 +108,7 @@ elif [[ "${PACKAGE_ARCH}" = "arm64" ]]; then
     cp systemd/rock5_h264_decode.service /tmp/qopenhd/etc/systemd/system/h264_decode.service
     cp systemd/rock5_h265_decode.service /tmp/qopenhd/etc/systemd/system/h265_decode.service
 
-    fpm -a ${PACKAGE_ARCH} -s dir -t deb -n ${PACKAGE_NAME} -v ${VERSION} -C ${TMPDIR} \
+    fpm -a ${PACKAGE_ARCH} -s dir -t deb -n qopenhd-rk3588 -v ${VERSION} -C ${TMPDIR} \
     -p qopenhd_VERSION_ARCH.deb \
     --after-install after-install.sh \
     ${PLATFORM_PACKAGES} || exit 1
