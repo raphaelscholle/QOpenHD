@@ -10,7 +10,6 @@ DISTRO=$3
 BUILD_TYPE=$4
 
 
-PACKAGE_NAME=qopenhd
 TMPDIR=/tmp/qopenhd/
 
 rm -rf /tmp/qopenhd/*
@@ -62,14 +61,17 @@ cp release/QOpenHD /tmp/qopenhd/usr/local/bin/ || exit 1
 
 # copying services
 if [[ "${PACKAGE_ARCH}" = "armhf" ]]; then
+PACKAGE_NAME=qopenhd
 cp systemd/rpi_qopenhd.service /tmp/qopenhd/etc/systemd/system/qopenhd.service || exit 1
 cp systemd/rpi_h264_decode.service /tmp/qopenhd/etc/systemd/system/h264_decode.service || exit 1
 elif [[ "${PACKAGE_ARCH}" = "arm64" ]]; then
 mkdir -p /tmp/qopenhd/etc/systemd/system/
-cp systemd/qopenhd/rock3_qopenhd.service /tmp/qopenhd/etc/systemd/system/qopenhd.service
+cp systemd/rock3_qopenhd.service /tmp/qopenhd/etc/systemd/system/qopenhd.service
 cp systemd/rock3_h264_decode.service /tmp/qopenhd/etc/systemd/system/h264_decode.service
 cp systemd/rock3_h265_decode.service /tmp/qopenhd/etc/systemd/system/h265_decode.service
+PACKAGE_NAME=qopenhd-rk3566
 else
+PACKAGE_NAME=qopenhd
 echo "X86 doesn't work with services"
 fi
 
@@ -85,18 +87,19 @@ fi
 VERSION="2.5.3-$(date '+%Y%m%d%H%M')-${VER2}"
 
 rm ${PACKAGE_NAME}_${VERSION}_${PACKAGE_ARCH}.deb > /dev/null 2>&1
-ls -a
 if [[ "${PACKAGE_ARCH}" = "armhf" ]]; then
     fpm -a ${PACKAGE_ARCH} -s dir -t deb -n ${PACKAGE_NAME} -v ${VERSION} -C ${TMPDIR} \
     -p qopenhd_VERSION_ARCH.deb \
     --after-install after-install.sh \
     ${PLATFORM_PACKAGES} || exit 1
 elif [[ "${PACKAGE_ARCH}" = "arm64" ]]; then
-    fpm -a ${PACKAGE_ARCH} -s dir -t deb -n ${PACKAGE_NAME}-rk3566 -v ${VERSION} -C ${TMPDIR} \
+    fpm -a ${PACKAGE_ARCH} -s dir -t deb -n ${PACKAGE_NAME} -v ${VERSION} -C ${TMPDIR} \
     -p qopenhd_VERSION_ARCH.deb \
     --after-install after-install.sh \
     ${PLATFORM_PACKAGES} || exit 1
     #Rock5Package
+    PACKAGE_NAME=qopenhd-rk3588
+
     rm /tmp/qopenhd/etc/systemd/system/qopenhd.service
     rm /tmp/qopenhd/etc/systemd/system/h265_decode.service
     rm /tmp/qopenhd/etc/systemd/system/h265_decode.service
@@ -105,7 +108,7 @@ elif [[ "${PACKAGE_ARCH}" = "arm64" ]]; then
     cp systemd/rock5_h264_decode.service /tmp/qopenhd/etc/systemd/system/h264_decode.service
     cp systemd/rock5_h265_decode.service /tmp/qopenhd/etc/systemd/system/h265_decode.service
 
-    fpm -a ${PACKAGE_ARCH} -s dir -t deb -n ${PACKAGE_NAME}-rk3588 -v ${VERSION} -C ${TMPDIR} \
+    fpm -a ${PACKAGE_ARCH} -s dir -t deb -n ${PACKAGE_NAME} -v ${VERSION} -C ${TMPDIR} \
     -p qopenhd_VERSION_ARCH.deb \
     --after-install after-install.sh \
     ${PLATFORM_PACKAGES} || exit 1
