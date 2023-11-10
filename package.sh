@@ -93,22 +93,22 @@ if [[ "${PACKAGE_ARCH}" = "armhf" ]]; then
     --after-install after-install.sh \
     ${PLATFORM_PACKAGES} || exit 1
 elif [[ "${PACKAGE_ARCH}" = "arm64" ]]; then
-    fpm -a ${PACKAGE_ARCH} -s dir -t deb -n qopenhd-rk3566 -v ${VERSION} -C ${TMPDIR} \
-    -p qopenhd_VERSION_ARCH.deb \
+    fpm -a ${PACKAGE_ARCH} -s dir -t deb -n ${PACKAGE_NAME} -v ${VERSION} -C ${TMPDIR} \
+    -p qopenhd_rk3566_VERSION_ARCH.deb \
     --after-install after-install.sh \
     ${PLATFORM_PACKAGES} || exit 1
     #Rock5Package
 
     rm /tmp/qopenhd/etc/systemd/system/qopenhd.service
-    rm /tmp/qopenhd/etc/systemd/system/h265_decode.service
+    rm /tmp/qopenhd/etc/systemd/system/h264_decode.service
     rm /tmp/qopenhd/etc/systemd/system/h265_decode.service
 
     cp systemd/rock5_qopenhd.service /tmp/qopenhd/etc/systemd/system/qopenhd.service
     cp systemd/rock5_h264_decode.service /tmp/qopenhd/etc/systemd/system/h264_decode.service
     cp systemd/rock5_h265_decode.service /tmp/qopenhd/etc/systemd/system/h265_decode.service
 
-    fpm -a ${PACKAGE_ARCH} -s dir -t deb -n qopenhd-rk3588 -v ${VERSION} -C ${TMPDIR} \
-    -p qopenhd_VERSION_ARCH.deb \
+    fpm -a ${PACKAGE_ARCH} -s dir -t deb -n ${PACKAGE_NAME} -v ${VERSION} -C ${TMPDIR} \
+    -p qopenhd_rk3588_VERSION_ARCH.deb \
     --after-install after-install.sh \
     ${PLATFORM_PACKAGES} || exit 1
 fi
